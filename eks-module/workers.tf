@@ -6,9 +6,9 @@ data "aws_ssm_parameter" "eks_ami_id" {
 }
 
 resource "aws_launch_template" "eks_workers" {
-  name_prefix   = "project-x-eks-dev-worker-nodes"
+  name_prefix   = var.eks_worker_lt_name #"project-x-eks-dev-worker-nodes"
   image_id      = data.aws_ssm_parameter.eks_ami_id.value
-  instance_type = "t3.medium"
+  instance_type = var.eks_worker_lt_inst_type #"t3.medium"
 
     # #!/bin/bash
     # set -o xtrace
@@ -22,16 +22,16 @@ resource "aws_launch_template" "eks_workers" {
 
 resource "aws_autoscaling_group" "eks_workers" {
   capacity_rebalance  = true
-  desired_capacity    = 2
-  max_size            = 3
-  min_size            = 1
-  vpc_zone_identifier = ["subnet-071c8c8c1dd4c5732", "subnet-0e51b86773f6f6aa4"]
+  desired_capacity    = var.worker_desired_capacity #2
+  max_size            = var.worker_max_size #3
+  min_size            = var.worker_min_size #1
+  vpc_zone_identifier = var.eks_vpc_subnet_ids #["subnet-0dbfb302199752bc2", "subnet-09e8de94c5c449353"]
 
   mixed_instances_policy {
     instances_distribution {
-      on_demand_base_capacity                  = 0
-      on_demand_percentage_above_base_capacity = 0
-      spot_allocation_strategy                 = "capacity-optimized"
+      on_demand_base_capacity                  = var.worker_on_demand_base_cap #0
+      on_demand_percentage_above_base_capacity = var.worker_on_demand_perc_above_base_cap #0
+      spot_allocation_strategy                 = var.worker_spot_alloc_strategy #"capacity-optimized"
     }
 
     launch_template {
@@ -40,13 +40,13 @@ resource "aws_autoscaling_group" "eks_workers" {
       }
 
       override {
-        instance_type     = "t3.medium"
-        weighted_capacity = "2"
+        instance_type     = var.lt_override_inst_type1 #"t3.medium"
+        weighted_capacity = var.lt_override_weighted_cap1 #"2"
       }
 
       override {
-        instance_type     = "t2.medium"
-        weighted_capacity = "2"
+        instance_type     = var.lt_override_inst_type2 #"t2.medium"
+        weighted_capacity = var.lt_override_weighted_cap2 #"2"
       }
     }
   }
