@@ -36,7 +36,7 @@ resource "aws_autoscaling_group" "eks_workers_asg" {
 
     launch_template {
       launch_template_specification {
-        launch_template_id = aws_launch_template.eks_workers.id
+        launch_template_id = aws_launch_template.eks_workers_lt.id
       }
 
       override {
@@ -91,7 +91,7 @@ resource "aws_iam_role_policy_attachment" "cluster-AmazonEC2ContainerRegistryRea
 resource "aws_eks_node_group" "eks_worker_node" {
   cluster_name    = aws_eks_cluster.cluster.name
   node_group_name = "eks_worker_node"
-  node_role_arn   = aws_iam_role.example.arn
+  node_role_arn   = aws_iam_role.eks_worker_iam_role.arn
   subnet_ids      = var.eks_vpc_subnet_ids 
 
   scaling_config {
