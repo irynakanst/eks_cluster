@@ -55,7 +55,7 @@ resource "aws_autoscaling_group" "eks_workers_asg" {
 ######
 
 
-resource "aws_iam_role" "eks_worker_iam_role" {
+resource "aws_iam_role" "eks_worker_role" {
   name = "eks_worker_node_group"
 
   assume_role_policy = jsonencode({
@@ -72,17 +72,17 @@ resource "aws_iam_role" "eks_worker_iam_role" {
 
 resource "aws_iam_role_policy_attachment" "cluster-AmazonEKSWorkerNodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = aws_iam_role.eks_worker_iam_role.name
+  role       = aws_iam_role.eks_worker_role.name
 }
 
 resource "aws_iam_role_policy_attachment" "cluster-AmazonEKS_CNI_Policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = aws_iam_role.eks_worker_iam_role.name
+  role       = aws_iam_role.eks_worker_role.name
 }
 
 resource "aws_iam_role_policy_attachment" "cluster-AmazonEC2ContainerRegistryReadOnly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = aws_iam_role.eks_worker_iam_role.name
+  role       = aws_iam_role.eks_worker_role.name
 }
 
 ### EKS MANAGED WORKER NODES
@@ -91,7 +91,7 @@ resource "aws_iam_role_policy_attachment" "cluster-AmazonEC2ContainerRegistryRea
 resource "aws_eks_node_group" "eks_worker_node" {
   cluster_name    = aws_eks_cluster.cluster.name
   node_group_name = "eks_worker_node"
-  node_role_arn   = aws_iam_role.eks_worker_iam_role.arn
+  node_role_arn   = aws_iam_role.eks_worker_role.arn
   subnet_ids      = var.eks_vpc_subnet_ids 
 
   scaling_config {

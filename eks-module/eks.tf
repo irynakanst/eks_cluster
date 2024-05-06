@@ -1,6 +1,6 @@
 resource "aws_eks_cluster" "cluster" {
   name     = var.eks_cluster_name  #"project-x-dev"
-  role_arn = aws_iam_role.eks_cluster_role.arn
+  role_arn = aws_iam_role.eks_cluster_iam_role.arn
   version  = var.eks_cluster_version  #"1.29"
 
   vpc_config {
@@ -15,7 +15,7 @@ resource "aws_eks_cluster" "cluster" {
   # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
   # Otherwise, EKS will not be able to properly delete EKS managed EC2 infrastructure such as Security Groups.
   depends_on = [
-    aws_iam_role_policy_attachment.eks_cluster_role-AmazonEKSClusterPolicy
+    aws_iam_role_policy_attachment.eks_cluster_iam_role-AmazonEKSClusterPolicy
   ]
 
   tags = {
@@ -38,15 +38,15 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 # create IAM role
-resource "aws_iam_role" "eks_cluster_role" {
+resource "aws_iam_role" "eks_cluster_iam_role" {
   name               = var.iam_role_name #"project-x-dev-eks-iam-role"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
 # attach policy to the role
-resource "aws_iam_role_policy_attachment" "eks_cluster_role-AmazonEKSClusterPolicy" {
+resource "aws_iam_role_policy_attachment" "eks_cluster_iam_role-AmazonEKSClusterPolicy" {
   policy_arn = var.iam_role_policy_arn #"arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.eks_cluster_role.name
+  role       = aws_iam_role.eks_cluster_iam_role.name
 }
 
 
