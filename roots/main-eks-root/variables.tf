@@ -51,7 +51,7 @@ variable "iam_policy_actions" {
 
 variable "iam_role_name" {
   type        = string
-  # default     = "project-x-dev-eks-iam-role"
+  default     = "project-x-dev-eks-iam-role"
 }
 
 ### ATTACH POLICY TO THE ROLE 
@@ -65,7 +65,7 @@ variable "iam_role_policy_arn" {
 
 variable "eks_cluster_sg_name" {
   type        = string
-  # default     = "EKS Cluster Security Group"
+  default     = "EKS Cluster Security Group"
 }
 
 variable "eks_cluster_sg_description" {
