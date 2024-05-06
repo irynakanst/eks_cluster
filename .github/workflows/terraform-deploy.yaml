@@ -46,7 +46,7 @@ jobs:
         run: |
           echo ${{ vars.IAM_ROLE }}
           
-      Run Terraform commands
+      # Run Terraform commands
       - name: Initialize
         run: terraform init
 
