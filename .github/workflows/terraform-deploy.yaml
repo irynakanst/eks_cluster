@@ -46,9 +46,9 @@ jobs:
         run: |
           echo ${{ vars.IAM_ROLE }}
           
-      # Run Terraform commands
-      # - name: Initialize
-      #   run: terraform init
+      Run Terraform commands
+      - name: Initialize
+        run: terraform init
 
       # - name: Plan Infrastructure
       #   run: terraform plan -input=false
