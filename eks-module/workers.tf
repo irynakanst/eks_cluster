@@ -56,7 +56,7 @@ resource "aws_autoscaling_group" "eks_workers_asg" {
 
 
 resource "aws_iam_role" "eks_worker_role" {
-  name = "eks_worker_node_group"
+  name = "eks_worker_node_group_new"
 
   assume_role_policy = jsonencode({
     Statement = [{
