@@ -1,6 +1,6 @@
 resource "aws_eks_cluster" "cluster" {
   name     = var.eks_cluster_name  #"project-x-dev"
-  role_arn = aws_iam_role.eks_cluster_iam_role.arn
+  role_arn = aws_iam_role.eks_cluster_iam_role_new.arn
   version  = var.eks_cluster_version  #"1.29"
 
   vpc_config {
@@ -38,7 +38,7 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 # create IAM role
-resource "aws_iam_role" "eks_cluster_iam_role" {
+resource "aws_iam_role" "eks_cluster_iam_role_new" {
   name               = var.iam_role_name #"project-x-dev-eks-iam-role"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
@@ -46,7 +46,7 @@ resource "aws_iam_role" "eks_cluster_iam_role" {
 # attach policy to the role
 resource "aws_iam_role_policy_attachment" "eks_cluster_iam_role-AmazonEKSClusterPolicy" {
   policy_arn = var.iam_role_policy_arn #"arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.eks_cluster_iam_role.name
+  role       = aws_iam_role.eks_cluster_iam_role_new.name
 }
 
 
