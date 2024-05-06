@@ -24,7 +24,7 @@ module "project-x-eks-cluster" {
 
   #worker.tf
 
-  eks_worker_lt_nam = var.eks_worker_lt_name
+  eks_worker_lt_name = var.eks_worker_lt_name
   eks_worker_lt_inst_type = var.eks_worker_lt_inst_type
   worker_desired_capacity = var.worker_desired_capacity
   worker_max_size = var.worker_max_size
