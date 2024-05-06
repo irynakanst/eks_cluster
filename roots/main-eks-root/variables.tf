@@ -5,7 +5,7 @@ variable "eks_cluster_name" {
   default     = "project-x-dev"
 }
 
-variable "eks_cluster_version " {
+variable "eks_cluster_version" {
   type        = string
   default     = "1.29"
 }
@@ -27,7 +27,7 @@ variable "eks_cluster_tag" {
 
 ### TRUST POLICY FOR THE ROLE
 
-variable "iam_policy_effect " {
+variable "iam_policy_effect" {
   type        = string
   default     = "Allow"
 }
@@ -68,7 +68,7 @@ variable "eks_cluster_sg_name" {
   default     = "EKS Cluster Security Group"
 }
 
-variable "eks_cluster_sg_description " {
+variable "eks_cluster_sg_description" {
   type        = string
   default     = "Allow All inbound traffic from Self and all outbound traffic"
 }
@@ -111,7 +111,7 @@ variable "sg_cidr_ipv6" {
 
 ### WORKER NODE LAUNCH TEMPLATE
 
-variable "eks_worker_lt_name " {
+variable "eks_worker_lt_name" {
   type        = string
   default     = "project-x-eks-dev-worker-nodes"
 }
