@@ -17,7 +17,7 @@ eks_cluster_vpc_id = "vpc-0efe0b6e01d5c6b71"
 eks_cluster_sg_tags = {
      Name = "eks-cluster-sg"
     "kubernetes.io/cluster/project-x-dev" = "owned"
-    "aws:eks:cluster-name"	= "project-x-dev"
+    "aws:eks:cluster-name"	= "project-x-dev-new"
 }
 sg_port_ipv4 = 0
 sg_port_protocol = "-1"

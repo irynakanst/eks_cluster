@@ -2,7 +2,7 @@
 
 variable "eks_cluster_name" {
   type        = string
-  default     = "project-x-dev"
+  default     = "project-x-dev-new"
 }
 
 variable "eks_cluster_version" {
