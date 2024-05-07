@@ -1,6 +1,6 @@
 #eks.tf
 
-eks_cluster_name = "project-x-dev"
+eks_cluster_name = "project-x-dev-new"
 eks_cluster_version = "1.29"
 eks_vpc_subnet_ids = ["subnet-0dbfb302199752bc2", "subnet-09e8de94c5c449353"]
 eks_ipv4_cidr = "10.7.0.0/16"

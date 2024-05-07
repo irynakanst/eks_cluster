@@ -1,27 +1,27 @@
-# resource "aws_eks_cluster" "cluster" {
-#   name     = var.eks_cluster_name  #"project-x-dev"
-#   role_arn = aws_iam_role.eks_cluster_iam_role_new.arn
-#   version  = var.eks_cluster_version  #"1.29"
+resource "aws_eks_cluster" "cluster" {
+  name     = var.eks_cluster_name  #"project-x-dev"
+  role_arn = aws_iam_role.eks_cluster_iam_role_new.arn
+  version  = var.eks_cluster_version  #"1.29"
 
-#   vpc_config {
-#     subnet_ids = var.eks_vpc_subnet_ids #["subnet-0dbfb302199752bc2", "subnet-09e8de94c5c449353"]
-#     security_group_ids = [aws_security_group.eks_cluster_sg.id]
-#   }
+  vpc_config {
+    subnet_ids = var.eks_vpc_subnet_ids #["subnet-0dbfb302199752bc2", "subnet-09e8de94c5c449353"]
+    security_group_ids = [aws_security_group.eks_cluster_sg.id]
+  }
 
-#   kubernetes_network_config {
-#     service_ipv4_cidr = var.eks_ipv4_cidr #"10.7.0.0/16"
-#   }
+  kubernetes_network_config {
+    service_ipv4_cidr = var.eks_ipv4_cidr #"10.7.0.0/16"
+  }
 
-#   # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
-#   # Otherwise, EKS will not be able to properly delete EKS managed EC2 infrastructure such as Security Groups.
-#   depends_on = [
-#     aws_iam_role_policy_attachment.eks_cluster_iam_role-AmazonEKSClusterPolicy
-#   ]
+  # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
+  # Otherwise, EKS will not be able to properly delete EKS managed EC2 infrastructure such as Security Groups.
+  depends_on = [
+    aws_iam_role_policy_attachment.eks_cluster_iam_role-AmazonEKSClusterPolicy
+  ]
 
-#   tags = {
-#     Name = var.eks_cluster_tag #"project-x"
-#   }
-# }
+  tags = {
+    Name = var.eks_cluster_tag #"project-x"
+  }
+}
 
 # trust policy for the role
 data "aws_iam_policy_document" "assume_role" {
