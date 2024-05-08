@@ -60,7 +60,7 @@ db_subnet_gr_tags = {
 }
 db_sg_name = "reviews_app_sg"
 db_sg_description = "Allow traffic from Security Group of the EKS worker nodes"
-db_sg_tags =  {
+db_sg_tags = {
  Name = "project-x"
 }
 db_ingress_port = 5432

@@ -11,20 +11,26 @@ resource "aws_db_instance" "reviews-app-db" {
   manage_master_user_password = var.db_managed_password #true
   db_subnet_group_name = aws_db_subnet_group.reviews_app_sub.name
   vpc_security_group_ids = [aws_security_group.reviews_app_sg.id]
-  tags = var.db_tags
+  tags = {
+    Name = var.db_tags
+ }
 }
 
 resource "aws_db_subnet_group" "reviews_app_sub" {
   name       = var.db_subnet_gr_name #"reviews_app_subnets"
   subnet_ids = var.eks_vpc_subnet_ids #["subnet-0dbfb302199752bc2" ,"subnet-09e8de94c5c449353"]
-  tags = var.db_subnet_gr_tags
+  tags = {
+    Name = var.db_subnet_gr_tags
+  }
 }
 
 resource "aws_security_group" "reviews_app_sg" {
   name        = var.db_sg_name #"reviews_app_sg"
   description = var.db_sg_description #"Allow traffic from Security Group of the EKS worker nodes"
   vpc_id      = var.eks_cluster_vpc_id
-  tags = var.db_sg_tags
+  tags = {
+    Name = var.db_sg_tags
+  }
 
   ingress {
     from_port        = var.db_ingress_port #5432
