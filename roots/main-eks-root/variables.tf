@@ -264,6 +264,6 @@ variable "db_egress_protocol" {
 }
 
 variable "db_egress_cidr" {
-  type        = string
+  type        = list
   default     = ["0.0.0.0/0"]
 }
