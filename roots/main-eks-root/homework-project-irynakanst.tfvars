@@ -40,31 +40,31 @@ sg_cidr_ipv6 = "::/0"
 # lt_override_weighted_cap2 = 2
 
 
- #rds.tf
+#rds.tf
   
-  allocated_storage = 10
-  db_name = "reviews_app_data"
-  db_engine = "postgres"
-  db_engine_version = "16.2"
-  inst_class = "db.t3.micro"
-  db_username = "superadmin"
-  db_backup_retention_period = 7
-  db_identifier = "reviews-app-db"
-  db_managed_password = "true"
-  db_tags = {
-    Name = "project-x"
-  }
-  db_subnet_gr_name = "reviews_app_subnets"
-  db_subnet_gr_tags = {
-    Name = "project-x"
-  }
-  db_sg_name = "reviews_app_sg"
-  db_sg_description = "Allow traffic from Security Group of the EKS worker nodes"
-  db_sg_tags =  {
-    Name = "project-x"
-  }
-  db_ingress_port = 5432
-  db_ingress_protocol = "tcp"
-  db_egress_port = 0
-  db_egress_protocol = "-1"
-  db_egress_cidr = ["0.0.0.0/0"]
+allocated_storage = 10
+db_name = "reviews_app_data"
+db_engine = "postgres"
+db_engine_version = "16.2"
+inst_class = "db.t3.micro"
+db_username = "superadmin"
+db_backup_retention_period = 7
+db_identifier = "reviews-app-db"
+db_managed_password = "true"
+db_tags = {
+ Name = "project-x"
+}
+db_subnet_gr_name = "reviews_app_subnets"
+db_subnet_gr_tags = {
+ Name = "project-x"
+}
+db_sg_name = "reviews_app_sg"
+db_sg_description = "Allow traffic from Security Group of the EKS worker nodes"
+db_sg_tags =  {
+ Name = "project-x"
+}
+db_ingress_port = 5432
+db_ingress_protocol = "tcp"
+db_egress_port = 0
+db_egress_protocol = "-1"
+db_egress_cidr = ["0.0.0.0/0"]
