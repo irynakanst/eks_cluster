@@ -51,18 +51,12 @@ db_username = "superadmin"
 db_backup_retention_period = 7
 db_identifier = "reviews-app-db"
 db_managed_password = "true"
-db_tags = {
- Name = "project-x"
-}
+db_tags = "project-x"
 db_subnet_gr_name = "reviews_app_subnets"
-db_subnet_gr_tags = {
- Name = "project-x"
-}
+db_subnet_gr_tags = "project-x"
 db_sg_name = "reviews_app_sg"
 db_sg_description = "Allow traffic from Security Group of the EKS worker nodes"
-db_sg_tags = {
- Name = "project-x"
-}
+db_sg_tags = "project-x"
 db_ingress_port = 5432
 db_ingress_protocol = "tcp"
 db_egress_port = 0
