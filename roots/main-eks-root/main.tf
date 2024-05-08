@@ -1,6 +1,5 @@
 module "project-x-eks-cluster" {
   source = "../../eks-module"
-
   # eks.tf
   eks_cluster_name = var.eks_cluster_name 
   eks_cluster_version = var.eks_cluster_version
@@ -21,9 +20,7 @@ module "project-x-eks-cluster" {
   sg_port_protocol = var.sg_port_protocol
   sg_cidr_ipv4 = var.sg_cidr_ipv4
   sg_cidr_ipv6 = var.sg_cidr_ipv6
-
   #worker.tf
-
   eks_worker_lt_name = var.eks_worker_lt_name
   eks_worker_lt_inst_type = var.eks_worker_lt_inst_type
   worker_desired_capacity = var.worker_desired_capacity
@@ -44,9 +41,7 @@ module "project-x-eks-cluster" {
 
 module "project-x-rds" {
   source = "../../rds-postgres-module"
-
   #rds.tf
-  
   allocated_storage = var.allocated_storage
   db_name = var.db_name
   db_engine = var.db_engine

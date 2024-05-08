@@ -68,5 +68,3 @@ db_ingress_protocol = "tcp"
 db_egress_port = 0
 db_egress_protocol = "-1"
 db_egress_cidr = ["0.0.0.0/0"]
-
-
