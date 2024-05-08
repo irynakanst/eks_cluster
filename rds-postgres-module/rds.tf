@@ -1,6 +1,6 @@
 resource "aws_db_instance" "reviews-app-db" {
   allocated_storage    = 10
-  db_name              = "reviews-app-data"
+  db_name              = "reviews_app_data"
   engine               = "postgres"
   engine_version       = "16.2"
   instance_class       = "db.t3.micro"
