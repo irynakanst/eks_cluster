@@ -60,4 +60,4 @@ jobs:
       #   run: terraform apply -var-file="homework-project-irynakanst.tfvars" -input=false -auto-approve
 
       - name: Destroy Infrastructure
-        run: terraform destroy -auto-approve    
+        run: terraform destroy -var-file="homework-project-irynakanst.tfvars" -auto-approve    
