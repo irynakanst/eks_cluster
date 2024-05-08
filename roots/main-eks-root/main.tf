@@ -45,6 +45,6 @@ module "project-x-eks-cluster" {
 module "project-x-rds" {
   source = "../../rds-postgres-module"
 
-  eks_vpc_subnet_id = var.eks_vpc_subnet_id
+  eks_vpc_subnet_ids = var.eks_vpc_subnet_ids
   eks_cluster_vpc_id = var.eks_cluster_vpc_id
 }
