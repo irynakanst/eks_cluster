@@ -38,3 +38,13 @@ module "project-x-eks-cluster" {
   lt_override_weighted_cap2 = var.lt_override_weighted_cap2
 
 }
+
+# Database 
+
+
+module "project-x-rds" {
+  source = "../../rds-postgres-module"
+
+  eks_vpc_subnet_id = var.eks_vpc_subnet_id
+  eks_cluster_vpc_id = var.eks_cluster_vpc_id
+}

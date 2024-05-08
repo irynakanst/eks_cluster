@@ -50,6 +50,9 @@ jobs:
       - name: Initialize
         run: terraform init
 
+      - name: Formate
+        run: terraform fmt
+
       - name: Plan Infrastructure
         run: terraform plan -input=false
 
