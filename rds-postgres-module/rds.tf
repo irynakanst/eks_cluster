@@ -38,7 +38,7 @@ resource "aws_security_group" "reviews_app_sg" {
     from_port        = 5432
     to_port          = 5432
     protocol         = "tcp"
-    security_groups = ["sg-0b9d79ea130d50930"]
+    security_groups = ["sg-00637108f1a081fe7"]
   }
 
   egress {
