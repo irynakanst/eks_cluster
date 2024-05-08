@@ -36,7 +36,7 @@ resource "aws_security_group" "reviews_app_sg" {
     from_port        = var.db_ingress_port #5432
     to_port          = var.db_ingress_port #5432
     protocol         = var.db_ingress_protocol #"tcp"
-    security_groups = ["sg-00637108f1a081fe7"]
+    security_groups = ["sg-08a33eb1cd299662f"]
   }
 
   egress {
