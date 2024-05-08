@@ -25,9 +25,9 @@ module "project-x-eks-cluster" {
   eks_worker_role_action = var.eks_worker_role_action
   eks_worker_role_effect = var.eks_worker_role_effect
   eks_worker_role_service = var.eks_worker_role_service
-  eks_worker_node_policy = var.eks_worker_node_policy
-  eks_cni_policy = var.eks_cni_policy
-  ec2_container_reg_policy = var.ec2_container_reg_policy
+  eks_worker_node_policy_arn = var.eks_worker_node_policy_arn
+  eks_cni_policy_arn = var.eks_cni_policy_arn
+  ec2_container_reg_policy_arn = var.ec2_container_reg_policy_arn
   eks_node_group_name = var.eks_node_group_name
   eks_worker_desired_size = var.eks_worker_desired_size
   eks_worker_max_size = var.eks_worker_max_size
