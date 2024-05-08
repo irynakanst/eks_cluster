@@ -5,6 +5,69 @@ data "aws_ssm_parameter" "eks_ami_id" {
   name = "/aws/service/eks/optimized-ami/${local.version}/amazon-linux-2/recommended/image_id"
 }
 
+### IAM ROLE FOR WORKER NODE
+
+resource "aws_iam_role" "eks_worker_role" {
+  name = var.eks_worker_role_name    #"eks_worker_iam_role"  #"eks_worker_node_group_new"
+
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = var.eks_worker_role_action #"sts:AssumeRole"
+      Effect = var.eks_worker_role_effect #"Allow"
+      Principal = {
+        Service = var.eks_worker_role_service #"ec2.amazonaws.com"
+      }
+    }]
+    Version = "2012-10-17"
+  })
+}
+
+### IAM ROLE POLICY ATTACHMENT 
+
+resource "aws_iam_role_policy_attachment" "cluster-AmazonEKSWorkerNodePolicy" {
+  policy_arn = var.eks_worker_node_policy_arn #"arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+  role       = aws_iam_role.eks_worker_role.name
+}
+
+resource "aws_iam_role_policy_attachment" "cluster-AmazonEKS_CNI_Policy" {
+  policy_arn = var.eks_cni_policy_arn #"arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  role       = aws_iam_role.eks_worker_role.name
+}
+
+resource "aws_iam_role_policy_attachment" "cluster-AmazonEC2ContainerRegistryReadOnly" {
+  policy_arn = var.ec2_container_reg_policy_arn #"arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role       = aws_iam_role.eks_worker_role.name
+}
+
+### EKS MANAGED WORKER NODES
+
+resource "aws_eks_node_group" "eks_worker_node" {
+  cluster_name    = aws_eks_cluster.cluster.name
+  node_group_name = var.eks_node_group_name #"eks_worker_node"
+  node_role_arn   = aws_iam_role.eks_worker_role.arn
+  subnet_ids      = var.eks_vpc_subnet_ids 
+
+  scaling_config {
+    desired_size = var.eks_worker_desired_size #1
+    max_size     = var.eks_worker_max_size #2
+    min_size     = var.eks_worker_min_size #1
+  }
+
+  update_config {
+    max_unavailable = var.eks_worker_max_unavailable #1
+  }
+
+  # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
+  # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
+  depends_on = [
+    aws_iam_role_policy_attachment.cluster-AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.cluster-AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.cluster-AmazonEC2ContainerRegistryReadOnly,
+  ]
+}
+
+
+
 # resource "aws_launch_template" "eks_workers_lt" {
 #   name_prefix   = var.eks_worker_lt_name #"project-x-eks-dev-worker-nodes"
 #   image_id      = data.aws_ssm_parameter.eks_ami_id.value
@@ -47,64 +110,3 @@ data "aws_ssm_parameter" "eks_ami_id" {
 #     }
 #   }
 # }
-
-######
-
-
-resource "aws_iam_role" "eks_worker_role" {
-  name = "eks_worker_node_group_new"
-
-  assume_role_policy = jsonencode({
-    Statement = [{
-      Action = "sts:AssumeRole"
-      Effect = "Allow"
-      Principal = {
-        Service = "ec2.amazonaws.com"
-      }
-    }]
-    Version = "2012-10-17"
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "cluster-AmazonEKSWorkerNodePolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = aws_iam_role.eks_worker_role.name
-}
-
-resource "aws_iam_role_policy_attachment" "cluster-AmazonEKS_CNI_Policy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = aws_iam_role.eks_worker_role.name
-}
-
-resource "aws_iam_role_policy_attachment" "cluster-AmazonEC2ContainerRegistryReadOnly" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = aws_iam_role.eks_worker_role.name
-}
-
-### EKS MANAGED WORKER NODES
-
-
-resource "aws_eks_node_group" "eks_worker_node" {
-  cluster_name    = aws_eks_cluster.cluster.name
-  node_group_name = "eks_worker_node"
-  node_role_arn   = aws_iam_role.eks_worker_role.arn
-  subnet_ids      = var.eks_vpc_subnet_ids 
-
-  scaling_config {
-    desired_size = 1
-    max_size     = 2
-    min_size     = 1
-  }
-
-  update_config {
-    max_unavailable = 1
-  }
-
-  # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
-  # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
-  depends_on = [
-    aws_iam_role_policy_attachment.cluster-AmazonEKSWorkerNodePolicy,
-    aws_iam_role_policy_attachment.cluster-AmazonEKS_CNI_Policy,
-    aws_iam_role_policy_attachment.cluster-AmazonEC2ContainerRegistryReadOnly,
-  ]
-}

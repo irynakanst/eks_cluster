@@ -111,64 +111,120 @@ variable "sg_cidr_ipv6" {
 
 ### WORKER NODE LAUNCH TEMPLATE
 
-variable "eks_worker_lt_name" {
-  type        = string
-  default     = "project-x-eks-dev-worker-nodes"
-}
+# variable "eks_worker_lt_name" {
+#   type        = string
+#   default     = "project-x-eks-dev-worker-nodes"
+# }
 
-variable "eks_worker_lt_inst_type" {
-  type        = string
-  default     = "t3.medium"
-}
+# variable "eks_worker_lt_inst_type" {
+#   type        = string
+#   default     = "t3.medium"
+# }
 
 ### WORKER NODE ASG
 
-variable "worker_desired_capacity" {
-  type        = number
-  default     = 2
-}
+# variable "worker_desired_capacity" {
+#   type        = number
+#   default     = 2
+# }
 
-variable "worker_max_size" {
-  type        = number
-  default     = 3
-}
+# variable "worker_max_size" {
+#   type        = number
+#   default     = 3
+# }
 
-variable "worker_min_size" {
-  type        = number
-  default     = 1
-}
+# variable "worker_min_size" {
+#   type        = number
+#   default     = 1
+# }
 
-variable "worker_on_demand_base_cap" {
-  type        = number
-  default     = 0
-}
+# variable "worker_on_demand_base_cap" {
+#   type        = number
+#   default     = 0
+# }
 
-variable "worker_on_demand_perc_above_base_cap" {
-  type        = number
-  default     = 0
-}
+# variable "worker_on_demand_perc_above_base_cap" {
+#   type        = number
+#   default     = 0
+# }
 
-variable "worker_spot_alloc_strategy" {
+# variable "worker_spot_alloc_strategy" {
+#   type        = string
+#   default     = "capacity-optimized"
+# }
+
+# variable "lt_override_inst_type1" {
+#   type        = string
+#   default     = "t3.medium"
+# }
+
+# variable "lt_override_weighted_cap1" {
+#   type        = number
+#   default     = 2
+# }
+
+# variable "lt_override_inst_type2" {
+#   type        = string
+#   default     = "t2.medium"
+# }
+
+# variable "lt_override_weighted_cap2" {
+#   type        = number
+#   default     = 2
+# }
+
+
+### IAM ROLE FOR WORKER NODE
+
+variable "eks_worker_role_name" {
   type        = string
-  default     = "capacity-optimized"
 }
 
-variable "lt_override_inst_type1" {
+variable "eks_worker_role_action" {
   type        = string
-  default     = "t3.medium"
 }
 
-variable "lt_override_weighted_cap1" {
-  type        = number
-  default     = 2
-}
-
-variable "lt_override_inst_type2" {
+variable "eks_worker_role_effect" {
   type        = string
-  default     = "t2.medium"
 }
 
-variable "lt_override_weighted_cap2" {
+variable "eks_worker_role_service" {
+  type        = string
+}
+
+
+### IAM ROLE POLICY ATTACHMENT 
+
+variable "eks_worker_node_policy_arn" {
+  type        = string
+}
+
+variable "eks_cni_policy_arn" {
+  type        = string
+}
+
+variable "ec2_container_reg_policy_arn" {
+  type        = string
+}
+
+### EKS MANAGED WORKER NODES 
+
+variable "eks_node_group_name" {
+  type        = string
+}
+
+variable "eks_worker_desired_size" {
   type        = number
-  default     = 2
+}
+
+variable "eks_worker_max_size" {
+  type        = number
+}
+
+variable "eks_worker_min_size" {
+  type        = number
+}
+
+variable "eks_worker_max_unavailable" {
+  type        = number
 }
