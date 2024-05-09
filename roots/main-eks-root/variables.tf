@@ -242,6 +242,10 @@ variable "db_ingress_protocol" {
   default = "tcp"
 }
 
+variable "eks_worker_sg_id" {
+  type        = list
+}
+
 variable "db_egress_port" {
   type    = number
   default = 0

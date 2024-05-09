@@ -51,7 +51,7 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_iam_role-AmazonEKSCluster
 
 
 resource "aws_security_group" "eks_cluster_sg" {
-  name        = var.eks_cluster_sg_name #"EKS Cluster Security Group"
+  name        = var.eks_cluster_sg_name #"EKS Cluster Security Group New"
   description = var.eks_cluster_sg_description #"Allow All inbound traffic from Self and all outbound traffic"
   vpc_id      = var.eks_cluster_vpc_id #"vpc-0efe0b6e01d5c6b71"
 

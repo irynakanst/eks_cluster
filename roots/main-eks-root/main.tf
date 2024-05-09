@@ -72,6 +72,7 @@ module "project-x-rds" {
   eks_cluster_vpc_id         = var.eks_cluster_vpc_id
   db_sg_tags                 = var.db_sg_tags
   db_ingress_port            = var.db_ingress_port
+  eks_worker_sg_id           = [module.project-x-eks-cluster.eks_worker_sg_id]
   db_ingress_protocol        = var.db_ingress_protocol
   db_egress_port             = var.db_egress_port
   db_egress_protocol         = var.db_egress_protocol
