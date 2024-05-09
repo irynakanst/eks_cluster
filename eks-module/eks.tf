@@ -60,7 +60,7 @@ resource "aws_security_group" "eks_cluster_sg" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4" {
   security_group_id = aws_security_group.eks_cluster_sg.id
-  # referenced_security_group_id         = aws_security_group.eks_cluster_sg.id
+  referenced_security_group_id         = aws_security_group.eks_cluster_sg.id
   from_port         = var.sg_port_ipv4 #0
   ip_protocol       = var.sg_port_protocol #"-1"
   to_port           = var.sg_port_ipv4 #0
