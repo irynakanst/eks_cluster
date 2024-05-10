@@ -1,10 +1,3 @@
-locals {
-  version = "1.29"
-}
-data "aws_ssm_parameter" "eks_ami_id" {
-  name = "/aws/service/eks/optimized-ami/${local.version}/amazon-linux-2/recommended/image_id"
-}
-
 ### IAM ROLE FOR WORKER NODE
 
 resource "aws_iam_role" "eks_worker_role" {
@@ -24,20 +17,26 @@ resource "aws_iam_role" "eks_worker_role" {
 
 ### IAM ROLE POLICY ATTACHMENT 
 
-resource "aws_iam_role_policy_attachment" "cluster-AmazonEKSWorkerNodePolicy" {
-  policy_arn = var.eks_worker_node_policy_arn #"arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+resource "aws_iam_role_policy_attachment" "eks_worker_attach_policy" {
+  for_each = toset(var.eks_worker_policies)
+  policy_arn = each.key
   role       = aws_iam_role.eks_worker_role.name
 }
 
-resource "aws_iam_role_policy_attachment" "cluster-AmazonEKS_CNI_Policy" {
-  policy_arn = var.eks_cni_policy_arn #"arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = aws_iam_role.eks_worker_role.name
-}
+# resource "aws_iam_role_policy_attachment" "cluster-AmazonEKSWorkerNodePolicy" {
+#   policy_arn = var.eks_worker_node_policy_arn #"arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+#   role       = aws_iam_role.eks_worker_role.name
+# }
 
-resource "aws_iam_role_policy_attachment" "cluster-AmazonEC2ContainerRegistryReadOnly" {
-  policy_arn = var.ec2_container_reg_policy_arn #"arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = aws_iam_role.eks_worker_role.name
-}
+# resource "aws_iam_role_policy_attachment" "cluster-AmazonEKS_CNI_Policy" {
+#   policy_arn = var.eks_cni_policy_arn #"arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+#   role       = aws_iam_role.eks_worker_role.name
+# }
+
+# resource "aws_iam_role_policy_attachment" "cluster-AmazonEC2ContainerRegistryReadOnly" {
+#   policy_arn = var.ec2_container_reg_policy_arn #"arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+#   role       = aws_iam_role.eks_worker_role.name
+# }
 
 ### EKS MANAGED WORKER NODES
 
@@ -46,6 +45,9 @@ resource "aws_eks_node_group" "eks_worker_node" {
   node_group_name = var.eks_node_group_name #"eks_worker_node"
   node_role_arn   = aws_iam_role.eks_worker_role.arn
   subnet_ids      = var.eks_vpc_subnet_ids 
+  version         = var.eks_worker_version #"1.29"
+  instance_types  = var.ec2_types #["t3.medium", "t2.medium"]
+  capacity_type   = var.ec2_pricing_type #"SPOT"
 
   scaling_config {
     desired_size = var.eks_worker_desired_size #1
@@ -109,4 +111,11 @@ resource "aws_eks_node_group" "eks_worker_node" {
 #       }
 #     }
 #   }
+# }
+
+# locals {
+#   version = "1.29"
+# }
+# data "aws_ssm_parameter" "eks_ami_id" {
+#   name = "/aws/service/eks/optimized-ami/${local.version}/amazon-linux-2/recommended/image_id"
 # }

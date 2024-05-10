@@ -15,10 +15,10 @@ variable "eks_vpc_subnet_ids" {
   default     = ["subnet-0dbfb302199752bc2", "subnet-09e8de94c5c449353"]
 }
 
-variable "eks_ipv4_cidr" {
-  type        = string
-  default     = "10.7.0.0/16"
-}
+# variable "eks_ipv4_cidr" {
+#   type        = string
+#   default     = "10.7.0.0/16"
+# }
 
 variable "eks_cluster_tag" {
   type        = string
@@ -109,6 +109,81 @@ variable "sg_cidr_ipv6" {
   default     = "::/0"
 }
 
+
+### IAM ROLE FOR WORKER NODE
+
+variable "eks_worker_role_name" {
+  type        = string
+}
+
+variable "eks_worker_role_action" {
+  type        = string
+}
+
+variable "eks_worker_role_effect" {
+  type        = string
+}
+
+variable "eks_worker_role_service" {
+  type        = string
+}
+
+
+### IAM ROLE POLICY ATTACHMENT 
+
+variable "eks_worker_policies" {
+  type        = list(string)
+}
+
+# variable "eks_worker_node_policy_arn" {
+#   type        = string
+# }
+
+# variable "eks_cni_policy_arn" {
+#   type        = string
+# }
+
+# variable "ec2_container_reg_policy_arn" {
+#   type        = string
+# }
+
+### EKS MANAGED WORKER NODES 
+
+variable "eks_node_group_name" {
+  type        = string
+}
+
+variable "eks_worker_version" {
+  type        = string
+  default     = "1.29"
+}
+
+variable "ec2_types" {
+  type        = list(string)
+}
+
+variable "ec2_pricing_type" {
+  type        = string
+}
+
+variable "eks_worker_desired_size" {
+  type        = number
+}
+
+variable "eks_worker_max_size" {
+  type        = number
+}
+
+variable "eks_worker_min_size" {
+  type        = number
+}
+
+variable "eks_worker_max_unavailable" {
+  type        = number
+}
+
+
+
 ### WORKER NODE LAUNCH TEMPLATE
 
 # variable "eks_worker_lt_name" {
@@ -172,59 +247,3 @@ variable "sg_cidr_ipv6" {
 #   type        = number
 #   default     = 2
 # }
-
-
-### IAM ROLE FOR WORKER NODE
-
-variable "eks_worker_role_name" {
-  type        = string
-}
-
-variable "eks_worker_role_action" {
-  type        = string
-}
-
-variable "eks_worker_role_effect" {
-  type        = string
-}
-
-variable "eks_worker_role_service" {
-  type        = string
-}
-
-
-### IAM ROLE POLICY ATTACHMENT 
-
-variable "eks_worker_node_policy_arn" {
-  type        = string
-}
-
-variable "eks_cni_policy_arn" {
-  type        = string
-}
-
-variable "ec2_container_reg_policy_arn" {
-  type        = string
-}
-
-### EKS MANAGED WORKER NODES 
-
-variable "eks_node_group_name" {
-  type        = string
-}
-
-variable "eks_worker_desired_size" {
-  type        = number
-}
-
-variable "eks_worker_max_size" {
-  type        = number
-}
-
-variable "eks_worker_min_size" {
-  type        = number
-}
-
-variable "eks_worker_max_unavailable" {
-  type        = number
-}

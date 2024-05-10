@@ -3,7 +3,7 @@
 eks_cluster_name           = "project-x-dev-new"
 eks_cluster_version        = "1.29"
 eks_vpc_subnet_ids         = ["subnet-0dbfb302199752bc2", "subnet-09e8de94c5c449353"]
-eks_ipv4_cidr              = "10.7.0.0/16"
+# eks_ipv4_cidr              = "10.7.0.0/16"
 eks_cluster_tag            = "project-x"
 iam_policy_effect          = "Allow"
 iam_policy_type            = "Service"
@@ -29,10 +29,18 @@ eks_worker_role_name = "eks_worker_iam_role"
 eks_worker_role_action = "sts:AssumeRole"
 eks_worker_role_effect = "Allow"
 eks_worker_role_service = "ec2.amazonaws.com"
-eks_worker_node_policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-eks_cni_policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-ec2_container_reg_policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+eks_worker_policies = [
+  "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy", 
+  "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy", 
+  "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+]
+# eks_worker_node_policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+# eks_cni_policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+# ec2_container_reg_policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 eks_node_group_name = "eks_worker_node"
+eks_worker_version = "1.29"
+ec2_types = ["t3.medium", "t2.medium"]
+ec2_pricing_type = "SPOT"
 eks_worker_desired_size = 1
 eks_worker_max_size = 2
 eks_worker_min_size = 1

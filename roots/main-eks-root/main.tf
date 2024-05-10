@@ -4,7 +4,7 @@ module "project-x-eks-cluster" {
   eks_cluster_name           = var.eks_cluster_name
   eks_cluster_version        = var.eks_cluster_version
   eks_vpc_subnet_ids         = var.eks_vpc_subnet_ids
-  eks_ipv4_cidr              = var.eks_ipv4_cidr
+  # eks_ipv4_cidr              = var.eks_ipv4_cidr
   eks_cluster_tag            = var.eks_cluster_tag
   iam_policy_effect          = var.iam_policy_effect
   iam_policy_type            = var.iam_policy_type
@@ -25,10 +25,14 @@ module "project-x-eks-cluster" {
   eks_worker_role_action = var.eks_worker_role_action
   eks_worker_role_effect = var.eks_worker_role_effect
   eks_worker_role_service = var.eks_worker_role_service
-  eks_worker_node_policy_arn = var.eks_worker_node_policy_arn
-  eks_cni_policy_arn = var.eks_cni_policy_arn
-  ec2_container_reg_policy_arn = var.ec2_container_reg_policy_arn
+  eks_worker_policies = var.eks_worker_policies
+  # eks_worker_node_policy_arn = var.eks_worker_node_policy_arn
+  # eks_cni_policy_arn = var.eks_cni_policy_arn
+  # ec2_container_reg_policy_arn = var.ec2_container_reg_policy_arn
   eks_node_group_name = var.eks_node_group_name
+  eks_worker_version = var.eks_worker_version
+  ec2_types = var.ec2_types
+  ec2_pricing_type = var.ec2_pricing_type
   eks_worker_desired_size = var.eks_worker_desired_size
   eks_worker_max_size = var.eks_worker_max_size
   eks_worker_min_size = var.eks_worker_min_size

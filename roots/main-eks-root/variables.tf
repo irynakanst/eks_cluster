@@ -15,10 +15,10 @@ variable "eks_vpc_subnet_ids" {
   default = ["subnet-0dbfb302199752bc2", "subnet-09e8de94c5c449353"]
 }
 
-variable "eks_ipv4_cidr" {
-  type    = string
-  default = "10.7.0.0/16"
-}
+# variable "eks_ipv4_cidr" {
+#   type    = string
+#   default = "10.7.0.0/16"
+# }
 
 variable "eks_cluster_tag" {
   type    = string
@@ -129,22 +129,39 @@ variable "eks_worker_role_service" {
 
 ### IAM ROLE POLICY ATTACHMENT 
 
-variable "eks_worker_node_policy_arn" {
-  type = string
+variable "eks_worker_policies" {
+  type        = list(string)
 }
 
-variable "eks_cni_policy_arn" {
-  type = string
-}
+# variable "eks_worker_node_policy_arn" {
+#   type = string
+# }
 
-variable "ec2_container_reg_policy_arn" {
-  type = string
-}
+# variable "eks_cni_policy_arn" {
+#   type = string
+# }
+
+# variable "ec2_container_reg_policy_arn" {
+#   type = string
+# }
 
 ### EKS MANAGED WORKER NODES 
 
 variable "eks_node_group_name" {
   type = string
+}
+
+variable "eks_worker_version" {
+  type        = string
+  default     = "1.29"
+}
+
+variable "ec2_types" {
+  type        = list(string)
+}
+
+variable "ec2_pricing_type" {
+  type        = string
 }
 
 variable "eks_worker_desired_size" {

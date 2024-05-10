@@ -9,7 +9,7 @@ resource "aws_eks_cluster" "cluster" {
   }
 
   kubernetes_network_config {
-    service_ipv4_cidr = var.eks_ipv4_cidr #"10.7.0.0/16"
+    service_ipv4_cidr = local.k8s_service_cidr #var.eks_ipv4_cidr #"10.7.0.0/16"
   }
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
