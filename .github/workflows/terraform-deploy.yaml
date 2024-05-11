@@ -53,11 +53,11 @@ jobs:
       # - name: Formate
       #   run: terraform fmt
 
-      - name: Plan Infrastructure
-        run: terraform plan -var-file="homework-project-irynakanst.tfvars" -input=false
+      # - name: Plan Infrastructure
+      #   run: terraform plan -var-file="homework-project-irynakanst.tfvars" -input=false
 
-      - name: Deploy Infrastructure
-        run: terraform apply -var-file="homework-project-irynakanst.tfvars" -input=false -auto-approve
+      # - name: Deploy Infrastructure
+      #   run: terraform apply -var-file="homework-project-irynakanst.tfvars" -input=false -auto-approve
 
-      # - name: Destroy Infrastructure
-      #   run: terraform destroy -var-file="homework-project-irynakanst.tfvars" -auto-approve    
+      - name: Destroy Infrastructure
+        run: terraform destroy -var-file="homework-project-irynakanst.tfvars" -auto-approve    
