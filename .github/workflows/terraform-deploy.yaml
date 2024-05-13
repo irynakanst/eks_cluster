@@ -16,6 +16,8 @@ on:
 permissions:
   id-token: write # This is required for requesting the JWT
   contents: read  # This is required for actions/checkout
+env: 
+ ENVIRONMENT_STAGE: ${{ (github.ref == 'refs/heads/main' && 'production') || (github.ref == 'refs/heads/staging' && 'staging') || 'dev' }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -35,7 +37,7 @@ jobs:
       - name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::861952334844:role/gitHubActionsIAMroleDevTerraform
+          role-to-assume: ${{ vars.IAM_ROLE }} #arn:aws:iam::861952334844:role/gitHubActionsIAMroleDevTerraform
           role-session-name: githubactionssession
           aws-region: "us-east-1"
 
@@ -48,16 +50,25 @@ jobs:
           
       # Run Terraform commands
       - name: Initialize
-        run: terraform init
+        run: terraform init -backend-config="bucket=${{ vars.STATE_BUCKET }}"
 
       # - name: Formate
       #   run: terraform fmt
 
-      # - name: Plan Infrastructure
-      #   run: terraform plan -var-file="homework-project-irynakanst.tfvars" -input=false
+      - name: Plan Infrastructure
+        run: terraform plan -var-file="homework-project-irynakanst.tfvars" -input=false
 
-      # - name: Deploy Infrastructure
-      #   run: terraform apply -var-file="homework-project-irynakanst.tfvars" -input=false -auto-approve
+      - name: Deploy Infrastructure
+        run: terraform apply -var-file="homework-project-irynakanst.tfvars" -input=false -auto-approve
 
-      - name: Destroy Infrastructure
-        run: terraform destroy -var-file="homework-project-irynakanst.tfvars" -auto-approve    
+
+        - name: Apply permissions in aws-auth for Kubernetes RBAC
+          working-directory: ./kubernetes-resources
+          run: |
+          aws eks update-kubeconfig --name project-x-dev-new
+          kubectl apply -f aws-auth-dev.yaml
+          account_number=$(aws sts get-caller-identity --query "Account" --output text)
+
+
+      # - name: Destroy Infrastructure
+      #   run: terraform destroy -var-file="homework-project-irynakanst.tfvars" -auto-approve    
