@@ -61,10 +61,9 @@ jobs:
       - name: Deploy Infrastructure
         run: terraform apply -var-file="homework-project-irynakanst.tfvars" -input=false -auto-approve
 
-
-        - name: Apply permissions in aws-auth for Kubernetes RBAC
-          working-directory: ./kubernetes-resources
-          run: |
+      - name: Apply permissions in aws-auth for Kubernetes RBAC
+        working-directory: ./kubernetes-resources
+        run: |
           aws eks update-kubeconfig --name project-x-dev-new
           kubectl apply -f aws-auth-dev.yaml
           account_number=$(aws sts get-caller-identity --query "Account" --output text)
