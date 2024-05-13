@@ -10,10 +10,7 @@ data:
       - system:nodes
       rolearn: arn:aws:iam::861952334844:role/eks_worker_iam_role
       username: "system:node:{{EC2PrivateDNSName}}"
-    # - groups:
-    #   - system:masters
-    #   rolearn: arn:aws:iam::485669235563:role/AWSReservedSSO_Administrator_0c7159c2da0ccedf
-    #   username: adminrole
+  mapUsers: | 
     - groups:
       - system:masters
       userarn: arn:aws:iam::861952334844:user/Iryna
