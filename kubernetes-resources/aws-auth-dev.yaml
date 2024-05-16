@@ -10,7 +10,15 @@ data:
       - system:nodes
       rolearn: arn:aws:iam::861952334844:role/eks_worker_iam_role
       username: "system:node:{{EC2PrivateDNSName}}"
-  mapUsers: | 
+    - groups:
+      - system:masters
+      rolearn: arn:aws:iam::861952334844:role/GitHubActionsCICDrole
+      username: CICDrole
+    - groups:
+      - system:masters
+      rolearn: arn:aws:iam::861952334844:role/gitHubActionsIAMroleDevTerraform
+      username: adminTFrole
+  mapUsers: |
     - groups:
       - system:masters
       userarn: arn:aws:iam::861952334844:user/Iryna
