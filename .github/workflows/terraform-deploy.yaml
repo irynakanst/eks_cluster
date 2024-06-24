@@ -53,7 +53,7 @@ jobs:
         run: terraform init -backend-config="bucket=${{ vars.STATE_BUCKET }}"
 
       - name: Formate
-        run: terraform fmt --recursive -check
+        run: terraform fmt -check
 
       - name: Plan Infrastructure
         run: terraform plan -var-file="homework-project-irynakanst.tfvars" -input=false
