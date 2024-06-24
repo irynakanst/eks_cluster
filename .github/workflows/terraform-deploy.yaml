@@ -1,14 +1,14 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Terraform Deployment Workflow
+name: Terraform Deployment Workflow Extra tasks
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: ["main", "dev", "staging"]
-  pull_request:
-    branches: ["dev"]
+    branches: ["main", "dev", "staging", "testing"]
+  # pull_request:
+  #   branches: ["dev"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -52,11 +52,11 @@ jobs:
       - name: Initialize
         run: terraform init -backend-config="bucket=${{ vars.STATE_BUCKET }}"
 
-      # - name: Formate
-      #   run: terraform fmt
+      - name: Formate
+        run: terraform fmt --recursive -check
 
-      # - name: Plan Infrastructure
-      #   run: terraform plan -var-file="homework-project-irynakanst.tfvars" -input=false
+      - name: Plan Infrastructure
+        run: terraform plan -var-file="homework-project-irynakanst.tfvars" -input=false
 
       # - name: Deploy Infrastructure
       #   run: terraform apply -var-file="homework-project-irynakanst.tfvars" -input=false -auto-approve
@@ -69,5 +69,5 @@ jobs:
       #     kubectl get nodes
       #     account_number=$(aws sts get-caller-identity --query "Account" --output text)
 
-      - name: Destroy Infrastructure
-        run: terraform destroy -var-file="homework-project-irynakanst.tfvars" -auto-approve
+      # - name: Destroy Infrastructure
+      #   run: terraform destroy -var-file="homework-project-irynakanst.tfvars" -auto-approve
