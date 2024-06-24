@@ -41,7 +41,7 @@ jobs:
           role-session-name: githubactionssession
           aws-region: "us-east-1"
 
-      - name: Checkout repository
+      - name: Checkout repository 
         uses: actions/checkout@v4
 
       - name: Test command
