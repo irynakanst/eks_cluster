@@ -87,3 +87,7 @@ module "project-x-eks-cluster" {
 module "project-x-docdb" {
   source = "../../documentdb"
 }
+
+output "kms_key_id" {
+  value = aws_kms_key.docdb-kms-key.id
+}

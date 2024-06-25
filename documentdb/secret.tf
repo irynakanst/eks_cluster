@@ -8,14 +8,14 @@ resource "random_password" "docdb_password" {
 ### Creating secret
 
 resource "aws_secretsmanager_secret" "docdb_secret" {
-  name = "docdb-secret"
+  name                    = "docdb-secret"
   recovery_window_in_days = 0
 }
 
 ### Adding secret values
 
 resource "aws_secretsmanager_secret_version" "docdb_values" {
-  secret_id     = aws_secretsmanager_secret.docdb_secret.id
+  secret_id = aws_secretsmanager_secret.docdb_secret.id
   secret_string = jsonencode({
     master_username = "superuser"
     master_password = random_password.docdb_password.result
