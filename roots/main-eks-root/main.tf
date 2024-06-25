@@ -1,9 +1,9 @@
 module "project-x-eks-cluster" {
   source = "../../eks-module"
   # eks.tf
-  eks_cluster_name           = var.eks_cluster_name
-  eks_cluster_version        = var.eks_cluster_version
-  eks_vpc_subnet_ids         = var.eks_vpc_subnet_ids
+  eks_cluster_name    = var.eks_cluster_name
+  eks_cluster_version = var.eks_cluster_version
+  eks_vpc_subnet_ids  = var.eks_vpc_subnet_ids
   # eks_ipv4_cidr              = var.eks_ipv4_cidr
   eks_cluster_tag            = var.eks_cluster_tag
   iam_policy_effect          = var.iam_policy_effect
@@ -21,21 +21,21 @@ module "project-x-eks-cluster" {
   sg_cidr_ipv4               = var.sg_cidr_ipv4
   sg_cidr_ipv6               = var.sg_cidr_ipv6
   #worker.tf
-  eks_worker_role_name = var.eks_worker_role_name
-  eks_worker_role_action = var.eks_worker_role_action
-  eks_worker_role_effect = var.eks_worker_role_effect
+  eks_worker_role_name    = var.eks_worker_role_name
+  eks_worker_role_action  = var.eks_worker_role_action
+  eks_worker_role_effect  = var.eks_worker_role_effect
   eks_worker_role_service = var.eks_worker_role_service
-  eks_worker_policies = var.eks_worker_policies
+  eks_worker_policies     = var.eks_worker_policies
   # eks_worker_node_policy_arn = var.eks_worker_node_policy_arn
   # eks_cni_policy_arn = var.eks_cni_policy_arn
   # ec2_container_reg_policy_arn = var.ec2_container_reg_policy_arn
-  eks_node_group_name = var.eks_node_group_name
-  eks_worker_version = var.eks_worker_version
-  ec2_types = var.ec2_types
-  ec2_pricing_type = var.ec2_pricing_type
-  eks_worker_desired_size = var.eks_worker_desired_size
-  eks_worker_max_size = var.eks_worker_max_size
-  eks_worker_min_size = var.eks_worker_min_size
+  eks_node_group_name        = var.eks_node_group_name
+  eks_worker_version         = var.eks_worker_version
+  ec2_types                  = var.ec2_types
+  ec2_pricing_type           = var.ec2_pricing_type
+  eks_worker_desired_size    = var.eks_worker_desired_size
+  eks_worker_max_size        = var.eks_worker_max_size
+  eks_worker_min_size        = var.eks_worker_min_size
   eks_worker_max_unavailable = var.eks_worker_max_unavailable
   # eks_worker_lt_name                   = var.eks_worker_lt_name
   # eks_worker_lt_inst_type              = var.eks_worker_lt_inst_type

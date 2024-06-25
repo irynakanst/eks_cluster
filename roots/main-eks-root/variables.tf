@@ -130,7 +130,7 @@ variable "eks_worker_role_service" {
 ### IAM ROLE POLICY ATTACHMENT 
 
 variable "eks_worker_policies" {
-  type        = list(string)
+  type = list(string)
 }
 
 # variable "eks_worker_node_policy_arn" {
@@ -152,16 +152,16 @@ variable "eks_node_group_name" {
 }
 
 variable "eks_worker_version" {
-  type        = string
-  default     = "1.29"
+  type    = string
+  default = "1.29"
 }
 
 variable "ec2_types" {
-  type        = list(string)
+  type = list(string)
 }
 
 variable "ec2_pricing_type" {
-  type        = string
+  type = string
 }
 
 variable "eks_worker_desired_size" {
