@@ -24,7 +24,7 @@ resource "aws_docdb_cluster_instance" "cluster_instances" {
   count              = 1
   identifier         = "my-docdb-cluster-test-${count.index}"
   cluster_identifier = aws_docdb_cluster.docdb.id
-  instance_class     = "db.t3.meduim"
+  instance_class     = "db.t3.medium"
   apply_immediately  = true
 }
 
