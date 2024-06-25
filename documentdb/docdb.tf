@@ -67,7 +67,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_eks_worker_ipv4" {
   from_port         = 27017
   ip_protocol       = "tcp"
   to_port           = 27017
-  cidr_ipv4         = "10.7.0.0/16"
+  cidr_ipv4         = "0.0.0.0/0"
 }
 
 ### egress rule for docdb
