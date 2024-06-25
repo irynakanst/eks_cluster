@@ -13,7 +13,7 @@ resource "aws_docdb_cluster" "docdb" {
   db_cluster_parameter_group_name = aws_docdb_cluster_parameter_group.docdb-param-gp.id
   deletion_protection             = false
   storage_encrypted               = true
-  kms_key_id                      = "fddb7fc7-5b4d-45b9-a49c-e74df3dc2efb"
+  kms_key_id                      = "arn:aws:kms:us-east-1:861952334844:key/fddb7fc7-5b4d-45b9-a49c-e74df3dc2efb"
   port                            = 27017
   vpc_security_group_ids          = [aws_security_group.docdb-sg.id]
 }

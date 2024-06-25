@@ -64,5 +64,5 @@ resource "aws_kms_key" "docdb-kms-key" {
 }
 
 output "kms_key_id" {
-  value = aws_kms_key.docdb-kms-key.id
+  value = aws_kms_key.docdb-kms-key.arn
 }
