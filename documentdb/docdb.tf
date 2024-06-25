@@ -1,32 +1,32 @@
 ### docdb cluster
 
-resource "aws_docdb_cluster" "docdb" {
-  cluster_identifier              = "my-docdb-cluster-test"
-  engine                          = "docdb"
-  master_username                 = "superuser"
-  master_password                 = "superpassword"
-  backup_retention_period         = 1
-  skip_final_snapshot             = true
-  apply_immediately               = true
-  availability_zones              = ["us-east-1a", "us-east-1b"]
-  db_subnet_group_name            = aws_docdb_subnet_group.docdb-subnet-gp.id
-  db_cluster_parameter_group_name = aws_docdb_cluster_parameter_group.docdb-param-gp.id
-  deletion_protection             = false
-  #   storage_encrypted = true
-  #   kms_key_id = 
-  port                   = 27017
-  vpc_security_group_ids = [aws_security_group.docdb-sg.id]
-}
+# resource "aws_docdb_cluster" "docdb" {
+#   cluster_identifier              = "my-docdb-cluster-test"
+#   engine                          = "docdb"
+#   master_username                 = "superuser"
+#   master_password                 = "superpassword"
+#   backup_retention_period         = 1
+#   skip_final_snapshot             = true
+#   apply_immediately               = true
+#   availability_zones              = ["us-east-1a", "us-east-1b"]
+#   db_subnet_group_name            = aws_docdb_subnet_group.docdb-subnet-gp.id
+#   db_cluster_parameter_group_name = aws_docdb_cluster_parameter_group.docdb-param-gp.id
+#   deletion_protection             = false
+#   #   storage_encrypted = true
+#   #   kms_key_id = 
+#   port                   = 27017
+#   vpc_security_group_ids = [aws_security_group.docdb-sg.id]
+# }
 
 ### docdb cluster instances
 
-resource "aws_docdb_cluster_instance" "cluster_instances" {
-  count              = 1
-  identifier         = "my-docdb-cluster-test-${count.index}"
-  cluster_identifier = aws_docdb_cluster.docdb.id
-  instance_class     = "db.t3.medium"
-  apply_immediately  = true
-}
+# resource "aws_docdb_cluster_instance" "cluster_instances" {
+#   count              = 1
+#   identifier         = "my-docdb-cluster-test-${count.index}"
+#   cluster_identifier = aws_docdb_cluster.docdb.id
+#   instance_class     = "db.t3.medium"
+#   apply_immediately  = true
+# }
 
 ### docdb parameter group
 
@@ -67,7 +67,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_eks_worker_ipv4" {
   from_port         = 27017
   ip_protocol       = "tcp"
   to_port           = 27017
-  cidr_ipv4         = "0.0.0.0/0"
+#   cidr_ipv4         = "0.0.0.0/0"
 }
 
 ### egress rule for docdb
