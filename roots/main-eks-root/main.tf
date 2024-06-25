@@ -82,3 +82,8 @@ module "project-x-eks-cluster" {
 #   db_egress_protocol         = var.db_egress_protocol
 #   db_egress_cidr             = var.db_egress_cidr
 # }
+
+
+module "project-x-docdb" {
+  source = "../../documentdb"
+}
