@@ -62,23 +62,23 @@ resource "aws_security_group" "docdb-sg" {
 
 ### ingress rule for docdb
 
-resource "aws_security_group_rule" "allow_eks_worker_ipv4" {
-  type                     = "ingress"
-  from_port                = 27017
-  to_port                  = 27017
-  protocol                 = "tcp"
-  source_security_group_id = "sg-08eb1ab570cf7fcab"  # Security group to allow
-  security_group_id        = "sg-08eb1ab570cf7fcab"  # Security group being modified
-}
-
-# resource "aws_vpc_security_group_ingress_rule" "allow_eks_worker_ipv4" {
-#   source_security_group_id = "sg-08eb1ab570cf7fcab"
-#   security_group_id = "sg-08eb1ab570cf7fcab"
-#   from_port         = 27017
-#   ip_protocol       = "tcp"
-#   to_port           = 27017
-# #   cidr_ipv4         = "0.0.0.0/0"
+# resource "aws_security_group_rule" "allow_eks_worker_ipv4" {
+#   type                     = "ingress"
+#   from_port                = 27017
+#   to_port                  = 27017
+#   protocol                 = "tcp"
+#   source_security_group_id = "sg-08eb1ab570cf7fcab"  # Security group to allow
+#   security_group_id        = "sg-08eb1ab570cf7fcab"  # Security group being modified
 # }
+
+resource "aws_vpc_security_group_ingress_rule" "allow_eks_worker_ipv4" {
+  source_security_group_id = "sg-08eb1ab570cf7fcab"
+  security_group_id = aws_security_group.docdb-sg.id
+  from_port         = 27017
+  ip_protocol       = "tcp"
+  to_port           = 27017
+#   cidr_ipv4         = "0.0.0.0/0"
+}
 
 ### egress rule for docdb
 
