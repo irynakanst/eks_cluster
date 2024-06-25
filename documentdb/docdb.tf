@@ -65,7 +65,7 @@ resource "aws_security_group" "docdb-sg" {
 resource "aws_vpc_security_group_ingress_rule" "allow_eks_worker_ipv4" {
   security_group_id = "sg-08eb1ab570cf7fcab"
   from_port         = 27017
-  protocol          = "tcp"
+  ip_protocol          = "tcp"
   to_port           = 27017
 }
 
@@ -73,8 +73,8 @@ resource "aws_vpc_security_group_ingress_rule" "allow_eks_worker_ipv4" {
 
 resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
   security_group_id = aws_security_group.docdb-sg.id
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_ipv4         = "0.0.0.0/0"
   from_port         = 0
   to_port           = 0
-  protocol          = "-1" # semantically equivalent to all ports
+  ip_protocol          = "-1" # semantically equivalent to all ports
 }
