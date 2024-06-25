@@ -3,8 +3,8 @@
 resource "aws_docdb_cluster" "docdb" {
   cluster_identifier              = "my-docdb-cluster-test"
   engine                          = "docdb"
-  master_username                 = "superuser"
-  master_password                 = "superpassword"
+  master_username                 = local.secret.master_username #"superuser"
+  master_password                 = local.secret.master_password #random_password.docdb_password.result
   backup_retention_period         = 1
   skip_final_snapshot             = true
   apply_immediately               = true
