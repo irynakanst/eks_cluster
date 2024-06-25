@@ -55,30 +55,30 @@ module "project-x-eks-cluster" {
 ### DATABASE
 
 
-module "project-x-rds" {
-  source = "../../rds-postgres-module"
-  #rds.tf
-  allocated_storage          = var.allocated_storage
-  db_name                    = var.db_name
-  db_engine                  = var.db_engine
-  db_engine_version          = var.db_engine_version
-  inst_class                 = var.inst_class
-  db_username                = var.db_username
-  db_backup_retention_period = var.db_backup_retention_period
-  db_identifier              = var.db_identifier
-  db_managed_password        = var.db_managed_password
-  db_tags                    = var.db_tags
-  db_subnet_gr_name          = var.db_subnet_gr_name
-  eks_vpc_subnet_ids         = var.eks_vpc_subnet_ids
-  db_subnet_gr_tags          = var.db_subnet_gr_tags
-  db_sg_name                 = var.db_sg_name
-  db_sg_description          = var.db_sg_description
-  eks_cluster_vpc_id         = var.eks_cluster_vpc_id
-  db_sg_tags                 = var.db_sg_tags
-  db_ingress_port            = var.db_ingress_port
-  eks_worker_sg_id           = [module.project-x-eks-cluster.eks_worker_sg_id]
-  db_ingress_protocol        = var.db_ingress_protocol
-  db_egress_port             = var.db_egress_port
-  db_egress_protocol         = var.db_egress_protocol
-  db_egress_cidr             = var.db_egress_cidr
-}
+# module "project-x-rds" {
+#   source = "../../rds-postgres-module"
+#   #rds.tf
+#   allocated_storage          = var.allocated_storage
+#   db_name                    = var.db_name
+#   db_engine                  = var.db_engine
+#   db_engine_version          = var.db_engine_version
+#   inst_class                 = var.inst_class
+#   db_username                = var.db_username
+#   db_backup_retention_period = var.db_backup_retention_period
+#   db_identifier              = var.db_identifier
+#   db_managed_password        = var.db_managed_password
+#   db_tags                    = var.db_tags
+#   db_subnet_gr_name          = var.db_subnet_gr_name
+#   eks_vpc_subnet_ids         = var.eks_vpc_subnet_ids
+#   db_subnet_gr_tags          = var.db_subnet_gr_tags
+#   db_sg_name                 = var.db_sg_name
+#   db_sg_description          = var.db_sg_description
+#   eks_cluster_vpc_id         = var.eks_cluster_vpc_id
+#   db_sg_tags                 = var.db_sg_tags
+#   db_ingress_port            = var.db_ingress_port
+#   eks_worker_sg_id           = [module.project-x-eks-cluster.eks_worker_sg_id]
+#   db_ingress_protocol        = var.db_ingress_protocol
+#   db_egress_port             = var.db_egress_port
+#   db_egress_protocol         = var.db_egress_protocol
+#   db_egress_cidr             = var.db_egress_cidr
+# }
