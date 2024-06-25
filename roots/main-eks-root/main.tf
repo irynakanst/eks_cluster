@@ -89,5 +89,5 @@ module "project-x-docdb" {
 }
 
 output "kms_key_id" {
-  value = aws_kms_key.docdb-kms-key.id
+  value = module.project-x-docdb.kms_key_id
 }
