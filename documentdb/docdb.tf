@@ -31,7 +31,7 @@ resource "aws_docdb_cluster_instance" "cluster_instances" {
 ### docdb parameter group
 
 resource "aws_docdb_cluster_parameter_group" "docdb-param-gp" {
-  family      = "docdb4.0"
+  family      = "docdb5.0"
   name        = "no-tls-parameter-group"
   description = "docdb-test no tls cluster parameter group"
 
@@ -65,9 +65,9 @@ resource "aws_security_group" "docdb-sg" {
 resource "aws_vpc_security_group_ingress_rule" "allow_eks_worker_ipv4" {
   security_group_id = "sg-08eb1ab570cf7fcab"
   from_port         = 27017
-  ip_protocol          = "tcp"
+  ip_protocol       = "tcp"
   to_port           = 27017
-  cidr_ipv4       = "10.7.0.0/16"
+  cidr_ipv4         = "10.7.0.0/16"
 }
 
 ### egress rule for docdb
@@ -77,5 +77,5 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
   cidr_ipv4         = "0.0.0.0/0"
   from_port         = 0
   to_port           = 0
-  ip_protocol          = "-1" # semantically equivalent to all ports
+  ip_protocol       = "-1" # semantically equivalent to all ports
 }
