@@ -63,7 +63,7 @@ resource "aws_security_group" "docdb-sg" {
 ### ingress rule for docdb
 
 resource "aws_vpc_security_group_ingress_rule" "allow_eks_worker_ipv4" {
-  security_group_id = "sg-08eb1ab570cf7fcab"
+  referenced_security_group_id = "sg-08eb1ab570cf7fcab"
   from_port         = 27017
   ip_protocol       = "tcp"
   to_port           = 27017
