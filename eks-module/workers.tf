@@ -64,6 +64,11 @@ resource "aws_eks_node_group" "eks_worker_node" {
   depends_on = [
     aws_iam_role_policy_attachment.eks_worker_attach_policy
   ]
+  
+  tags = {
+    k8s.io/cluster-autoscaler/project-x-dev-new = owned 
+    k8s.io/cluster-autoscaler/enabled = true 
+  }
 }
 
 

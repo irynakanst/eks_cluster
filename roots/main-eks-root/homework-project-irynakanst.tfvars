@@ -30,6 +30,7 @@ eks_worker_role_action  = "sts:AssumeRole"
 eks_worker_role_effect  = "Allow"
 eks_worker_role_service = "ec2.amazonaws.com"
 eks_worker_policies = [
+  "arn:aws:iam::861952334844:policy/Cluster-autoscaller"
   "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
   "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
   "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
@@ -41,8 +42,8 @@ eks_node_group_name        = "eks_worker_node"
 eks_worker_version         = "1.29"
 ec2_types                  = ["t3.medium", "t2.medium"]
 ec2_pricing_type           = "SPOT"
-eks_worker_desired_size    = 1
-eks_worker_max_size        = 2
+eks_worker_desired_size    = 2
+eks_worker_max_size        = 5
 eks_worker_min_size        = 1
 eks_worker_max_unavailable = 1
 # eks_worker_lt_name = "project-x-eks-dev-worker-nodes"

@@ -53,7 +53,7 @@ jobs:
         run: terraform init -backend-config="bucket=${{ vars.STATE_BUCKET }}"
 
       - name: Formate
-        run: terraform fmt --recursive -check
+        run: terraform fmt -recursive -check
 
       - name: Plan Infrastructure
         run: terraform plan -var-file="homework-project-irynakanst.tfvars" -input=false
@@ -71,3 +71,11 @@ jobs:
 
       # - name: Destroy Infrastructure
       #   run: terraform destroy -var-file="homework-project-irynakanst.tfvars" -auto-approve
+
+      - name: Deploy Cluster-Autoscaller
+        run: |
+          cd ./cluster-autoscaler
+          kubectl apply -f clusterrole.yaml
+          kubectl apply -f clusterrolebindings.yaml
+          kubectl apply -f serviceaccount.yaml
+          kubectl apply -f deployment.yaml
