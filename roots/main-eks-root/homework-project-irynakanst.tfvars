@@ -30,7 +30,7 @@ eks_worker_role_action  = "sts:AssumeRole"
 eks_worker_role_effect  = "Allow"
 eks_worker_role_service = "ec2.amazonaws.com"
 eks_worker_policies = [
-  "arn:aws:iam::861952334844:policy/Cluster-autoscaller"
+  "arn:aws:iam::861952334844:policy/Cluster-autoscaller",
   "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
   "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
   "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
