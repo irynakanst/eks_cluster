@@ -84,10 +84,10 @@ module "project-x-eks-cluster" {
 # }
 
 
-module "project-x-docdb" {
-  source = "../../documentdb"
-}
+# module "project-x-docdb" {
+#   source = "../../documentdb"
+# }
 
-output "kms_key_id" {
-  value = module.project-x-docdb.kms_key_id
-}
+# output "kms_key_id" {
+#   value = module.project-x-docdb.kms_key_id
+# }
