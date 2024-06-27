@@ -76,8 +76,8 @@ jobs:
       #   run: terraform destroy -var-file="homework-project-irynakanst.tfvars" -auto-approve
 
       - name: Deploy Cluster-Autoscaller
+        working-directory: ./cluster-autoscaler-module
         run: |
-          cd cluster-autoscaler-module
           kubectl apply -f clusterrole.yaml
           kubectl apply -f clusterrolebindings.yaml
           kubectl apply -f serviceaccount.yaml
