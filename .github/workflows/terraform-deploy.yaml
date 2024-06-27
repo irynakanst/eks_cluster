@@ -77,7 +77,7 @@ jobs:
 
       - name: Deploy Cluster-Autoscaller
         run: |
-          cd ./cluster-autoscaler
+          cd ./cluster-autoscaler-module
           kubectl apply -f clusterrole.yaml
           kubectl apply -f clusterrolebindings.yaml
           kubectl apply -f serviceaccount.yaml
